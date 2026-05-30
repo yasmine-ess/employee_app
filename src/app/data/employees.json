@@ -1,0 +1,5 @@
+[
+  { "id": 1, "name": "Alice Martin", "email": "alice@example.com", "department": "Informatique", "salary": 3500 },
+  { "id": 2, "name": "Karim Bensalem", "email": "karim@example.com", "department": "RH", "salary": 2800 },
+  { "id": 3, "name": "Sophie Dubois", "email": "sophie@example.com", "department": "Finance", "salary": 3200 }
+]
