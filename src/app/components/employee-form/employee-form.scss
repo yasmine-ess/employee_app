@@ -1,0 +1,88 @@
+.container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+.card-header {
+  background: #1A1A2E;
+  padding: 24px 28px;
+  h2 {
+    color: white;
+    font-size: 20px;
+    margin: 0 0 6px 0;
+  }
+  p {
+    color: #A8C7FA;
+    font-size: 13px;
+    margin: 0;
+  }
+}
+
+.card-body {
+  padding: 28px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #1A1A2E;
+    margin-bottom: 7px;
+  }
+  input, select {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid #E2E8F0;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #2D2D2D;
+    outline: none;
+    box-sizing: border-box;
+    transition: border 0.2s;
+    &:focus {
+      border-color: #4F8EF7;
+    }
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.btn-cancel {
+  background: #F1F5F9;
+  color: #64748B;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  &:hover { background: #E2E8F0; }
+}
+
+.btn-save {
+  background: #4F8EF7;
+  color: white;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  &:hover { background: #3a7de8; }
+}

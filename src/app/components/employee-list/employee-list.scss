@@ -89,6 +89,11 @@ tr:hover td {
   cursor: pointer;
   font-size: 13px;
 }
-
+.empty {
+  text-align: center;
+  padding: 40px !important;
+  color: #94A3B8;
+  font-style: italic;
+}
 .btn-edit:hover { background: #BFDBFE; }
 .btn-delete:hover { background: #FECACA; }
