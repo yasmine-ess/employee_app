@@ -6,12 +6,14 @@
     </div>
 
     <div class="card-body">
+      
       <div class="form-group">
         <label>Nom complet</label>
         <input 
           type="text" 
           [(ngModel)]="employee.name" 
           placeholder="Ex: Alice Martin"
+          
         />
       </div>
 
@@ -21,12 +23,14 @@
           type="email" 
           [(ngModel)]="employee.email" 
           placeholder="Ex: alice@example.com"
+          
         />
       </div>
 
       <div class="form-group">
         <label>Département</label>
-        <select [(ngModel)]="employee.department">
+        <select [(ngModel)]="employee.department" >
+            
           <option value="">-- Choisir --</option>
           <option value="Informatique">Informatique</option>
           <option value="RH">RH</option>

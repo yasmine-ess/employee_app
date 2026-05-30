@@ -1,35 +1,51 @@
-<div class="container">
-  <div class="header">
-    <h2>Liste des Employés</h2>
-  <button class="btn-add" (click)="goToAdd()">+ Ajouter</button>
+<div class="toast-success" *ngIf="showToast">
+  <span>✅ Opération effectuée avec succès !</span>
+</div>
+<div class="modal-overlay" *ngIf="showModal">
+  <div class="modal">
+    <div class="modal-icon">🗑️</div>
+    <h3>Confirmer la suppression</h3>
+    <p>Êtes-vous sûr de vouloir supprimer <strong>{{ employeeToDelete?.name }}</strong> ? Cette action est irréversible.</p>
+    <div class="modal-actions">
+      <button class="btn-cancel-modal" (click)="cancelDelete()">Annuler</button>
+      <button class="btn-confirm-delete" (click)="confirmDelete()">Oui, supprimer</button>
+    </div>
   </div>
+</div>
+<div class="container">
+    <div class="header">
+        <h2>Liste des Employés</h2>
+        <button class="btn-add" (click)="goToAdd()">+ Ajouter</button>
+    </div>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Nom</th>
-        <th>Email</th>
-        <th>Département</th>
-        <th>Salaire</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-          <tr *ngIf="employees.length === 0">
-    <td colspan="5" class="empty">
-      Aucun employé trouvé. Cliquez sur "+ Ajouter" pour commencer !
-    </td>
-  </tr>
-      <tr *ngFor="let employee of employees"> <!-- ngFor c'est une boucle comme le foreach en C# elle répéte la ligne-->
-        <td>{{ employee.name }}</td>
-        <td>{{ employee.email }}</td>
-        <td>{{ employee.department }}</td>
-        <td>{{ employee.salary }} €</td>
-        <td>
-          <button class="btn-edit" (click)="goToEdit(employee.id)">Modifier</button>
-          <button class="btn-delete" (click)="delete(employee.id)">Supprimer</button>  <!-- quand je clique je fais un appele a la méthode delete dans le .ts -->
-        </td>
-      </tr>
-    </tbody>
-  </table>
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Département</th>
+                <th>Salaire</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngIf="employees.length === 0">
+                <td colspan="5" class="empty">
+                    Aucun employé trouvé. Cliquez sur "+ Ajouter" pour commencer !
+                </td>
+            </tr>
+            <tr *ngFor="let employee of employees">
+                <!-- ngFor c'est une boucle comme le foreach en C# elle répéte la ligne-->
+                <td>{{ employee.name }}</td>
+                <td>{{ employee.email }}</td>
+                <td>{{ employee.department }}</td>
+                <td>{{ employee.salary }} €</td>
+                <td>
+                    <button class="btn-edit" (click)="goToEdit(employee.id)">Modifier</button>
+                   <button class="btn-delete" (click)="delete(employee)">Supprimer</button>
+                    <!-- quand je clique je fais un appele a la méthode delete dans le .ts -->
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
