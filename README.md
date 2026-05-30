@@ -12,7 +12,7 @@ Application web de gestion des employés développée avec Angular 18+.
 
 ## 🛠️ Technologies utilisées
 
-- Angular 18+
+- Angular 21
 - TypeScript
 - SCSS
 - Angular Router
