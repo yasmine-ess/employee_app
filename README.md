@@ -1,4 +1,4 @@
-# 🧑‍💼 Employee App — Angular CRUD
+# Employee App — Angular CRUD
 
 Application web de gestion des employés développée avec Angular 18+.
 
@@ -35,7 +35,7 @@ Ouvre **http://localhost:4200**
 - Validation des formulaires
 - Navbar de navigation
 
-## 👩‍💻 Auteure
+##
 
 **Esseghir Yasmine** — Développeuse Full Stack .NET / Angular
 [LinkedIn](https://www.linkedin.com/in/yasmine-esseghir-9a2539252)
