@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Employee } from '../../models/employee.model';
 import { EmployeeService } from '../../services/employee.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-employee-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,FormsModule],
   templateUrl: './employee-list.html',
   styleUrl: './employee-list.scss'
 })
@@ -61,5 +62,14 @@ export class EmployeeListComponent implements OnInit {
 private showSuccessToast(): void {
   this.showToast = true;
   setTimeout(() => this.showToast = false, 3000);
+}
+
+//recherche en temps réel
+searchText = '';
+
+get filteredEmployees(): Employee[] {
+  return this.employees.filter(e =>
+    e.name.toLowerCase().includes(this.searchText.toLowerCase())
+  );
 }
 }

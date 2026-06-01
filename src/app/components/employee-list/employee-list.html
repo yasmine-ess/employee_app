@@ -14,8 +14,16 @@
 </div>
 <div class="container">
     <div class="header">
-        <h2>Liste des Employés</h2>
-        <button class="btn-add" (click)="goToAdd()">+ Ajouter</button>
+        <h2>Liste des Employés <span class="counter">{{ filteredEmployees.length }}</span></h2>
+        <div class="header-right">
+    <input 
+      class="search-input"
+      type="text"
+      [(ngModel)]="searchText"
+      placeholder="🔍 Rechercher un employé..."
+    />
+    <button class="btn-add" (click)="goToAdd()">+ Ajouter</button>
+  </div>
     </div>
 
     <table>
@@ -29,12 +37,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngIf="employees.length === 0">
+            <tr *ngIf="filteredEmployees.length === 0">
                 <td colspan="5" class="empty">
                     Aucun employé trouvé. Cliquez sur "+ Ajouter" pour commencer !
                 </td>
             </tr>
-            <tr *ngFor="let employee of employees">
+            <tr *ngFor="let employee of filteredEmployees">
                 <!-- ngFor c'est une boucle comme le foreach en C# elle répéte la ligne-->
                 <td>{{ employee.name }}</td>
                 <td>{{ employee.email }}</td>
