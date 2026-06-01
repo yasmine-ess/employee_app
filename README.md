@@ -1,6 +1,6 @@
 # Employee App — Angular CRUD
 
-Application web de gestion des employés développée avec Angular 18+.
+Application web de gestion des employés développée avec Angular 21.
 
 ## ✨ Fonctionnalités
 
