@@ -32,8 +32,6 @@ Ouvre **http://localhost:4200**
 ## 📌 À venir
 
 - Connexion à un vrai backend ASP.NET Core
-- Validation des formulaires
-- Navbar de navigation
 
 ##
 
