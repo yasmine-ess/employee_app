@@ -6,54 +6,65 @@
     </div>
 
     <div class="card-body">
-      
-      <div class="form-group">
-        <label>Nom complet</label>
-        <input 
-          type="text" 
-          [(ngModel)]="employee.name" 
-          placeholder="Ex: Alice Martin"
-          
-        />
-      </div>
+      <form #employeeForm="ngForm" novalidate>
 
-      <div class="form-group">
-        <label>Email</label>
-        <input 
-          type="email" 
-          [(ngModel)]="employee.email" 
-          placeholder="Ex: alice@example.com"
-          
-        />
-      </div>
+        <div class="form-group">
+          <label>Nom complet</label>
+          <input
+            type="text"
+            name="name"
+            [(ngModel)]="employee.name"
+            required
+            placeholder="Ex: Alice Martin"
+          />
+        </div>
 
-      <div class="form-group">
-        <label>Département</label>
-        <select [(ngModel)]="employee.department" >
-            
-          <option value="">-- Choisir --</option>
-          <option value="Informatique">Informatique</option>
-          <option value="RH">RH</option>
-          <option value="Finance">Finance</option>
-          <option value="Marketing">Marketing</option>
-        </select>
-      </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input
+            type="email"
+            name="email"
+            [(ngModel)]="employee.email"
+            required
+            email
+            placeholder="Ex: alice@example.com"
+          />
+        </div>
 
-      <div class="form-group">
-        <label>Salaire (€)</label>
-        <input 
-          type="number" 
-          [(ngModel)]="employee.salary" 
-          placeholder="Ex: 3000"
-        />
-      </div>
+        <div class="form-group">
+          <label>Département</label>
+          <select
+            name="department"
+            [(ngModel)]="employee.department"
+            required
+          >
+            <option value="">-- Choisir --</option>
+            <option value="Informatique">Informatique</option>
+            <option value="RH">RH</option>
+            <option value="Finance">Finance</option>
+            <option value="Marketing">Marketing</option>
+          </select>
+        </div>
 
-      <div class="actions">
-        <button class="btn-cancel" (click)="cancel()">Annuler</button>
-        <button class="btn-save" (click)="save()">
-          {{ isEditMode ? 'Enregistrer' : 'Ajouter' }}
-        </button>
-      </div>
+        <div class="form-group">
+          <label>Salaire (€)</label>
+          <input
+            type="text"
+            name="salary"
+            [(ngModel)]="employee.salary"
+             required 
+            placeholder="Ex: 3000"
+          />
+        </div>
+
+        <div class="actions">
+          <button class="btn-cancel" type="button" (click)="cancel()">Annuler</button>
+          <button class="btn-save" type="button" (click)="save(employeeForm)">
+            {{ isEditMode ? 'Enregistrer' : 'Ajouter' }}
+          </button>
+        </div>
+
+      </form>
     </div>
   </div>
 </div>

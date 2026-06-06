@@ -1,17 +1,5 @@
-<div class="toast-success" *ngIf="showToast">
-  <span>✅ Opération effectuée avec succès !</span>
-</div>
-<div class="modal-overlay" *ngIf="showModal">
-  <div class="modal">
-    <div class="modal-icon">🗑️</div>
-    <h3>Confirmer la suppression</h3>
-    <p>Êtes-vous sûr de vouloir supprimer <strong>{{ employeeToDelete?.name }}</strong> ? Cette action est irréversible.</p>
-    <div class="modal-actions">
-      <button class="btn-cancel-modal" (click)="cancelDelete()">Annuler</button>
-      <button class="btn-confirm-delete" (click)="confirmDelete()">Oui, supprimer</button>
-    </div>
-  </div>
-</div>
+
+
 <div class="container">
     <div class="header">
         <h2>Liste des Employés <span class="counter">{{ filteredEmployees.length }}</span></h2>

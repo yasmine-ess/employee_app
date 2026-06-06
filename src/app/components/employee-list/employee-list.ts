@@ -1,34 +1,41 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Employee } from '../../models/employee.model';
 import { EmployeeService } from '../../services/employee.service';
 import { FormsModule } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-employee-list',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './employee-list.html',
   styleUrl: './employee-list.scss'
 })
 export class EmployeeListComponent implements OnInit {
   employees: Employee[] = [];
-  showToast = false;
-  showModal = false;
-  employeeToDelete: Employee | undefined;
+  searchText = '';
 
-  constructor(private employeeService: EmployeeService , private router: Router) {}
- // ngOnInit est une méthode qui s'exécute automatiquement quand le composant se charge , comme page_load en asp.net
+  constructor(
+    private employeeService: EmployeeService,
+    private router: Router,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
-    //afficher tout les employés dès le chargement du composant
-    this.employees = this.employeeService.getAll(); 
-     // Affiche le toast si on revient du formulaire
+    this.employees = this.employeeService.getAll();
     if (history.state?.success) {
       this.showSuccessToast();
     }
   }
+
+  get filteredEmployees(): Employee[] {
+    return this.employees.filter(e =>
+      e.name.toLowerCase().includes(this.searchText.toLowerCase())
+    );
+  }
+
   goToAdd(): void {
     this.router.navigate(['/employees/add']);
   }
@@ -36,40 +43,36 @@ export class EmployeeListComponent implements OnInit {
   goToEdit(id: number): void {
     this.router.navigate(['/employees/edit', id]);
   }
- // la méthode delete est appelée quand on clique sur le bouton supprimer d'un employé , elle prend l'id de l'employé à supprimer en paramètre
+
   delete(employee: Employee): void {
-    this.employeeToDelete = employee;
-    this.showModal = true;
+    Swal.fire({
+      title: 'Confirmer la suppression',
+      html: `Voulez-vous supprimer <strong>${employee.name}</strong> ?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#EF4444',
+      cancelButtonColor: '#6B7280',
+      confirmButtonText: 'Oui, supprimer',
+      cancelButtonText: 'Annuler'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.employeeService.delete(employee.id);
+        this.employees = [...this.employeeService.getAll()];
+        this.cdr.detectChanges();
+        this.showSuccessToast();
+      }
+    });
   }
-  // Annule la suppression
-  cancelDelete(): void {
-    this.showModal = false;
-    this.employeeToDelete = undefined;
+
+  private showSuccessToast(): void {
+    Swal.fire({
+      toast: true,
+      position: 'top',
+      icon: 'success',
+      title: 'Opération effectuée avec succès !',
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: true
+    });
   }
-
-  // Confirme la suppression
-  confirmDelete(): void {
-    if (this.employeeToDelete) {
-      this.employeeService.delete(this.employeeToDelete.id);
-      this.employees = this.employeeService.getAll();
-      this.showModal = false;
-      this.employeeToDelete = undefined;
-      this.showSuccessToast();
-    }
-  }
-  //showToast = false;
-
-private showSuccessToast(): void {
-  this.showToast = true;
-  setTimeout(() => this.showToast = false, 3000);
-}
-
-//recherche en temps réel
-searchText = '';
-
-get filteredEmployees(): Employee[] {
-  return this.employees.filter(e =>
-    e.name.toLowerCase().includes(this.searchText.toLowerCase())
-  );
-}
 }

@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule , NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeService } from '../../services/employee.service';
 import { Employee } from '../../models/employee.model';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-employee-form',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule ],
   templateUrl: './employee-form.html',
   styleUrl: './employee-form.scss'
 })
@@ -39,15 +39,45 @@ export class EmployeeFormComponent implements OnInit {
       }
     }
   }
-
-  save(): void {
+save(form: NgForm): void {
+  if (form.invalid || !this.employee.salary || Number(this.employee.salary) <= 0)  {
+    Swal.fire({
+      icon: 'error',
+      title: 'Formulaire incomplet',
+      text: 'Veuillez remplir tous les champs obligatoires.',
+      confirmButtonColor: '#4F8EF7'
+    });
+    return;
+  }
+  const toSave = {
+    ...this.employee,
+    salary: Number(this.employee.salary)
+  };
+  if (this.isEditMode) {
+    this.employeeService.update({ id: this.employeeId, ...toSave });
+  } else {
+    this.employeeService.add(toSave);
+  }
+  Swal.fire({
+    toast: true,
+    position: 'top',
+    icon: 'success',
+    title: this.isEditMode ? 'Employé modifié !' : 'Employé ajouté !',
+    showConfirmButton: false,
+    timer: 1000,
+    timerProgressBar: true
+  }).then(() => {
+    this.router.navigate(['/employees']);
+  });
+}
+ /* save(): void {
     if (this.isEditMode) {
       this.employeeService.update({ id: this.employeeId, ...this.employee });
     } else {
       this.employeeService.add(this.employee);
     }
     this.router.navigate(['/employees']); //redirige vers la liste après sauvegarde, comme un Response.Redirect en ASP.NET !
-  }
+  }*/
 
   cancel(): void {
     this.router.navigate(['/employees']);
