@@ -35,7 +35,20 @@ export class EmployeeListComponent implements OnInit {
       e.name.toLowerCase().includes(this.searchText.toLowerCase())
     );
   }
+get totalEmployees(): number {
+  return this.employees.length;
+}
+//reduce() → additionne tous les salaires, comme un SUM en SQL
+//new Set() → supprime les doublons automatiquement — si 3 employés sont en "Informatique", Set ne le compte qu'une fois !
+get averageSalary(): number {
+  if (this.employees.length === 0) return 0;
+  const total = this.employees.reduce((sum, e) => sum + e.salary, 0);
+  return Math.round(total / this.employees.length);
+}
 
+get totalDepartments(): number {
+  return new Set(this.employees.map(e => e.department)).size;
+}
   goToAdd(): void {
     this.router.navigate(['/employees/add']);
   }
@@ -75,4 +88,7 @@ export class EmployeeListComponent implements OnInit {
       timerProgressBar: true
     });
   }
+  goToDetail(id: number): void {
+  this.router.navigate(['/employees/detail', id]);
+}
 }

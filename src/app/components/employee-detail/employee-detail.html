@@ -1,1 +1,51 @@
-<p>employee-detail works!</p>
+<div class="container" *ngIf="employee; else notFound">
+  <div class="card">
+
+    <div class="card-header">
+      <div class="avatar">{{ employee.name.charAt(0).toUpperCase() }}</div>
+      <div class="header-info">
+        <h2>{{ employee.name }}</h2>
+        <span class="badge">{{ employee.department }}</span>
+      </div>
+    </div>
+
+    <div class="card-body">
+      <div class="info-grid">
+
+        <div class="info-item">
+          <span class="info-label">📧 Email</span>
+          <span class="info-value">{{ employee.email }}</span>
+        </div>
+
+        <div class="info-item">
+          <span class="info-label">🏢 Département</span>
+          <span class="info-value">{{ employee.department }}</span>
+        </div>
+
+        <div class="info-item">
+          <span class="info-label">💰 Salaire</span>
+          <span class="info-value salary">{{ employee.salary }} €</span>
+        </div>
+
+        <div class="info-item">
+          <span class="info-label">🪪 ID Employé</span>
+          <span class="info-value">#{{ employee.id }}</span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card-footer">
+      <button class="btn-back" (click)="goBack()">← Retour</button>
+      <button class="btn-edit" (click)="goToEdit()">✏️ Modifier</button>
+    </div>
+
+  </div>
+</div>
+
+<ng-template #notFound>
+  <div class="not-found">
+    <p>❌ Employé introuvable.</p>
+    <button class="btn-back" (click)="goBack()">← Retour à la liste</button>
+  </div>
+</ng-template>

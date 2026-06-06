@@ -1,6 +1,31 @@
 
 
 <div class="container">
+    <div class="stats-grid">
+  <div class="stat-card">
+    <div class="stat-icon">👥</div>
+    <div class="stat-info">
+      <span class="stat-value">{{ totalEmployees }}</span>
+      <span class="stat-label">Total Employés</span>
+    </div>
+  </div>
+
+  <div class="stat-card">
+    <div class="stat-icon">💰</div>
+    <div class="stat-info">
+      <span class="stat-value">{{ averageSalary }} €</span>
+      <span class="stat-label">Salaire Moyen</span>
+    </div>
+  </div>
+
+  <div class="stat-card">
+    <div class="stat-icon">🏢</div>
+    <div class="stat-info">
+      <span class="stat-value">{{ totalDepartments }}</span>
+      <span class="stat-label">Départements</span>
+    </div>
+  </div>
+</div>
     <div class="header">
         <h2>Liste des Employés <span class="counter">{{ filteredEmployees.length }}</span></h2>
         <div class="header-right">
@@ -32,7 +57,9 @@
             </tr>
             <tr *ngFor="let employee of filteredEmployees">
                 <!-- ngFor c'est une boucle comme le foreach en C# elle répéte la ligne-->
-                <td>{{ employee.name }}</td>
+               <td class="clickable" (click)="goToDetail(employee.id)">{{ employee.name }}</td>
+                 <!-- quand je clique je fais un appele a la méthode goToDetail dans le .ts -->
+                 <!-- et je lui passe l'id de l'employé pour afficher les détails de cet employé -->    
                 <td>{{ employee.email }}</td>
                 <td>{{ employee.department }}</td>
                 <td>{{ employee.salary }} €</td>
@@ -41,6 +68,7 @@
                    <button class="btn-delete" (click)="delete(employee)">Supprimer</button>
                     <!-- quand je clique je fais un appele a la méthode delete dans le .ts -->
                 </td>
+             
             </tr>
         </tbody>
     </table>
